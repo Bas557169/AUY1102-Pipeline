@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  lint:
+  validacion-principal:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

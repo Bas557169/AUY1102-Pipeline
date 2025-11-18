@@ -1,13 +1,44 @@
-name: PR Validation
+name: Typescript for Pull Requests
 
 on:
   pull_request:
+    branches:
+      - master
   push:
+    branches:
+      - master
 
 jobs:
-  validacion-principal:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run validation
-        run: echo "Validación completa para CI/CD"
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint TypeScript
+        run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Unit Test TypeScript
+        run: npm run test:unit

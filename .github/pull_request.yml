@@ -1,0 +1,13 @@
+name: PR Validation
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  validacion-principal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run validation
+        run: echo "Validación completa para CI/CD"

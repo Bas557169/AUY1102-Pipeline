@@ -33,6 +33,7 @@
     "ext": "ts, js"
   },
   "scripts": {
+  "test": "npm run test:unit",
   "build": "rimraf dist && tsc",
   "build:ci": "npm run build && npm run types",
   "format": "prettier 'src/**/*.[jt]s?(x)' --write",
@@ -45,7 +46,7 @@
   "test:unit": "jest --passWithNoTests",
   "test:coverage": "jest --coverage",
   "test:dev": "jest --verbose --colors --expand --maxWorkers=50% --detectOpenHandles --errorOnDeprecated --bail",
-  "test:watch": "jest --watch --verbose --colors --expand --maxWorkers=25%",
+  "est:watch": "jest --watch --verbose --colors --expand --maxWorkers=25%",
   "types": "dts-bundle-generator --config dts-generator.json",
   "start": "node dist/value-object/index.js"
 },

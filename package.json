@@ -1,5 +1,5 @@
 {
-  "name": "@Fundacion-Instituto-Profesional-Duoc-UC/auy1102-pipeline",
+  "name": "@duocuc/auy1102-pipeline",
   "repository": {
     "type": "git",
     "url": "https://github.com/Fundacion-Instituto-Profesional-Duoc-UC/AUY1102-Pipeline.git"
@@ -33,21 +33,22 @@
     "ext": "ts, js"
   },
   "scripts": {
-    "build": "rimraf dist && tsc",
-    "build:ci": "npm run build && npm run types",
-    "format": "prettier 'src/**/*.[jt]s?(x)' --write",
-    "lint": "eslint src --ext js,ts",
-    "lint:ci": "npm run lint:fix && npm run format && npm run sort",
-    "lint:fix": "eslint src --ext js,ts --fix",
-    "prepare": "is-ci || husky install",
-    "prepublishOnly": "npm run build:ci",
-    "sort": "sort-package-json package.json",
-    "test:unit": "jest --passWithNoTests",
-    "test:coverage": "jest --coverage",
-    "test:dev": "jest --verbose --colors --expand --maxWorkers=50% --detectOpenHandles --errorOnDeprecated --bail",
-    "test:watch": "jest --watch --verbose --colors --expand --maxWorkers=25%",
-    "types": "dts-bundle-generator --config dts-generator.json"
-  },
+  "build": "rimraf dist && tsc",
+  "build:ci": "npm run build && npm run types",
+  "format": "prettier 'src/**/*.[jt]s?(x)' --write",
+  "lint": "eslint src --ext js,ts",
+  "lint:ci": "npm run lint:fix && npm run format && npm run sort",
+  "lint:fix": "eslint src --ext js,ts --fix",
+  "prepare": "",
+  "prepublishOnly": "npm run build:ci",
+  "sort": "sort-package-json package.json",
+  "test:unit": "jest --passWithNoTests",
+  "test:coverage": "jest --coverage",
+  "test:dev": "jest --verbose --colors --expand --maxWorkers=50% --detectOpenHandles --errorOnDeprecated --bail",
+  "test:watch": "jest --watch --verbose --colors --expand --maxWorkers=25%",
+  "types": "dts-bundle-generator --config dts-generator.json",
+  "start": "node dist/value-object/index.js"
+},
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
@@ -74,12 +75,21 @@
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.6",
-    "@semantic-release/npm": "^12.0.1",
+    "@semantic-release/npm": "^13.1.2",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@swc/core": "^1.3.1",
     "@swc/jest": "^0.2.22",
+    "@types/babel__core": "^7.20.5",
+    "@types/babel__generator": "^7.27.0",
+    "@types/babel__template": "^7.4.4",
+    "@types/babel__traverse": "^7.28.0",
+    "@types/body-parser": "^1.19.6",
+    "@types/express": "^5.0.5",
+    "@types/graceful-fs": "^4.1.9",
     "@types/jest": "^29.0.2",
     "@types/node": "^20.14.2",
+    "@types/pug": "^2.0.10",
+    "@types/strip-json-comments": "^0.0.30",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "babel-plugin-module-resolver": "^4.1.0",
@@ -87,7 +97,7 @@
     "eslint": "^8.23.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-node": "^4.1.0",
+    "eslint-config-node": "^1.6.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.29.1",
@@ -103,7 +113,7 @@
     "lint-staged": "^15.2.7",
     "lockfile-lint": "^4.8.0",
     "prettier": "^2.7.1",
-    "semantic-release": "^24.0.0",
+    "semantic-release": "^25.0.2",
     "sort-package-json": "^2.10.0",
     "ts-node-dev": "^2.0.0",
     "tslib": "^2.6.3",
@@ -113,7 +123,10 @@
     "node": ">=14"
   },
   "dependencies": {
-    "chokidar": "^2.0.3",
-    "cosmiconfig": "^6.0.0"
+    "body-parser": "^2.2.0",
+    "chokidar": "^4.0.3",
+    "cosmiconfig": "^6.0.0",
+    "express": "^5.1.0",
+    "pug": "^3.0.3"
   }
 }

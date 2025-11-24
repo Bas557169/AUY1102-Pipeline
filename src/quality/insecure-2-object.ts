@@ -1,32 +1,44 @@
-const username = "admin'; DROP TABLE Users; --";
-const queryString = `SELECT * FROM Users WHERE username='${username}'`;
+import express, { Request, Response } from "express";
 
-// XSS
+const app = express();
 
-const userInput = '<script>alert("XSS");</script>';
-const html = `<div>${userInput}</div>`;
+// SQL Injection (ejemplo inseguro)
+const username: string = "admin'; DROP TABLE Users; --";
+const queryString: string = `SELECT * FROM Users WHERE username='${username}'`;
 
-// CSRF
+// XSS (ejemplo inseguro)
+const userInput: string = '<script>alert("XSS");</script>';
+const html: string = `<div>${userInput}</div>`;
 
-app.post('/change-password', (req, res) => {
-  const newPassword = req.body.newPassword;
+// CSRF (ejemplo inseguro)
+app.post("/change-password", (req: Request, res: Response) => {
+  const newPassword: string = req.body.newPassword;
   // Cambiar la contraseña sin verificar el token CSRF
+  res.send(`Contraseña cambiada a: ${newPassword}`);
 });
 
-// Deserialización
+// Deserialización insegura
+app.post("/", (req: Request, res: Response) => {
+  const input: string = req.body.username || "";
+  res.send(`Hola ${input}`);
+});
 
-const data = JSON.parse(req.body);
-
-// Credenciales
-
-const dbPassword = 'password123';
+// Credenciales expuestas (ejemplo inseguro)
+const dbPassword: string = "password123";
 // const apiSecretKey = 'supersecretkey123'; // No usar en producción
 const config = {
-  dbUsername: 'admin',
-  dbPassword: 'password123',
-  apiKey: 'abc123',
+  dbUsername: "admin",
+  dbPassword: "password123",
+  apiKey: "abc123",
 };
 
-const hashedPassword = hash('password123');
+// Hash inseguro (ejemplo)
+function hash(value: string): string {
+  return `hashed(${value})`; // placeholder para evitar error TS2304
+}
+
+const hashedPassword: string = hash("password123");
 
 console.log(`Error: La contraseña ${dbPassword} no es válida`);
+
+export {};

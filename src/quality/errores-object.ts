@@ -1,14 +1,22 @@
-// Consistencia
-const value = 10;
-const resultadoFinal = value * 2;
+// src/quality/errores-object.ts
 
-// Adaptabilidad
-const message: string = 10;
+// 🔹 Consistencia
+const value: number = 10;
+const resultadoFinal: number = value * 2;
 
-// Responsabilidad
+// 🔹 Adaptabilidad
+const mensaje: string = "10";
 
+// 🔹 Responsabilidad
 class UserService {
-  getUserData() {}
+  getUserData(): Record<string, unknown> {
+    return {}; // Simulación de datos de usuario
+  }
 
-  sendEmail() {}
+  sendEmail(): void {
+    // Lógica de envío de correo
+  }
 }
+
+// 🔹 Exportación vacía para cumplir con --isolatedModules
+export {};

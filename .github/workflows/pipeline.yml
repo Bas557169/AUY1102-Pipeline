@@ -31,3 +31,47 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/app-ci:latest ${{ github.workspace }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/app-ci:latest
+
+  sonar:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_PROJECT_KEY: Bas557169_AUY1102-Pipeline
+          SONAR_ORGANIZATION: bas557169
+  
+  snyk:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: snyk/actions/node@master
+        with:
+          command: test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  codeql:
+    needs: build-test
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+      - uses: github/codeql-action/analyze@v3
+
+  scout:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: docker/scout-action@v1
+        with:
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/app-ci:latest
+          command: cves
+

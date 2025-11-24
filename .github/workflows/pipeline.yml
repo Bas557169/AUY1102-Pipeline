@@ -17,3 +17,17 @@ jobs:
 
       - name: Run Tests
         run: docker run app:test npm test
+
+  publish:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login Docker Hub
+        run: echo $ {{ secrets.DOCKERHUB_TOKEN }} | docker login -u $ {{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+      - name: Push image
+        run: |
+          docker build -t $ {{ secrets.DOCKERHUB_USERNAME }}/app-ci:latest .
+          docker push $ {{ secrets.DOCKERHUB_USERNAME }}/app-ci:latest

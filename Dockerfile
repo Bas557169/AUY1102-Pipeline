@@ -1,7 +1,7 @@
-FROM node:14-alpine3.16
-
+FROM node:20-alpine
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
 COPY . .
-
-WORKDIR /usr/src/app/
-
-RUN npm version
+RUN npm run build
+CMD ["npm", "start"]

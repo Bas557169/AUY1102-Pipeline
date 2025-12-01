@@ -124,7 +124,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "body-parser": "^2.2.0",
+    "body-parser": "^2.2.1",
     "chokidar": "^4.0.3",
     "cosmiconfig": "^6.0.0",
     "express": "^5.1.0",
